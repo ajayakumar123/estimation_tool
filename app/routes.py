@@ -6,7 +6,6 @@ from app.models import User
 from app.forms import RegistrationForm,LoginForm,EstimationForm
 from bson.objectid import ObjectId
 from datetime import timedelta
-import pdb
 
 
 
@@ -62,9 +61,33 @@ def get_token():
     user = mongo.db.users.find_one({'email': data['email']})
     password_check = bcrypt.check_password_hash(user["password"], data["password"])
     if user and password_check:
-        access_token = create_access_token(identity=data['email'], expires_delta=timedelta(hours=1))
+        access_token = create_access_token(identity=data['email'], expires_delta=timedelta(hours=6))
         return jsonify(success=True, access_token=access_token)
     return jsonify(success=False), 401
+
+@app.route('/api/get_estimate', methods=['POST'])
+def get_estimate():
+    data = request.get_json()
+    complexity = data['task_complexity']
+    size = data['task_size']
+    task_type = data['task_type']
+    query = {
+        'complexity': complexity,
+        'size': size,
+        'type': task_type
+    }
+    count = mongo.db.historical_data.count_documents(query)
+    if count == 0:
+        estimate=False
+    else:
+        estimated_efforts = []
+        historical_data = mongo.db.historical_data.find(query)
+        for task in historical_data:
+            estimated_efforts.append(task.get('estimated_effort',0))
+        estimate = sum(estimated_efforts)/len(estimated_efforts)
+        estimate = round(estimate,2)
+    return jsonify(success=True, estimate=estimate)
+    
 
 @app.route("/logout")
 def logout():

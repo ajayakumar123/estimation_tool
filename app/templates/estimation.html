@@ -4,92 +4,103 @@
         <form method="POST" action="">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Task Form</legend>
-                <div class="form-group">
-                    {{ form.task_details.label(class="form-control-label") }}
+                <div class="form-group row">
+                    {{ form.task_details.label(class="form-control-label col-sm-4") }}
                     {% if form.task_details.errors %}
-                        {{ form.task_details(class="form-control form-control-lg is-invalid") }}
+                        {{ form.task_details(class="form-control form-control col-sm-7 is-invalid") }}
                         <div class="invalid-feedback">
                             {% for error in form.task_details.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.task_details(class="form-control form-control-lg") }}
+                        {{ form.task_details(class="form-control form-control col-sm-7") }}
                     {% endif %}
                 </div>
-                <div class="form-group">
-                    {{ form.task_complexity.label(class="form-control-label") }}
+                <div class="form-group row">
+                    {{ form.task_complexity.label(class="form-control-label col-sm-4") }}
                     {% if form.task_complexity.errors %}
-                        {{ form.task_complexity(class="form-control form-control-lg is-invalid") }}
+                        {{ form.task_complexity(class="form-control form-control col-sm-7 is-invalid") }}
                         <div class="invalid-feedback">
                             {% for error in form.task_complexity.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.task_complexity(class="form-control form-control-lg") }}
+                        {{ form.task_complexity(class="form-control form-control col-sm-7",id="task-complexity") }}
                     {% endif %}
                 </div>
-                <div class="form-group">
-                    {{ form.task_size.label(class="form-control-label") }}
+                <div class="form-group row">
+                    {{ form.task_size.label(class="form-control-label col-sm-4") }}
                     {% if form.task_size.errors %}
-                        {{ form.task_size(class="form-control form-control-lg is-invalid") }}
+                        {{ form.task_size(class="form-control form-control col-sm-7 is-invalid") }}
                         <div class="invalid-feedback">
                             {% for error in form.task_size.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.task_size(class="form-control form-control-lg") }}
+                        {{ form.task_size(class="form-control form-control col-sm-7",id="task-size") }}
                     {% endif %}
                 </div>
-                <div class="form-group">
-                    {{ form.task_type.label(class="form-control-label") }}
+                <div class="form-group row">
+                    {{ form.task_type.label(class="form-control-label col-sm-4") }}
                     {% if form.task_type.errors %}
-                        {{ form.task_type(class="form-control form-control-lg is-invalid") }}
+                        {{ form.task_type(class="form-control form-control col-sm-7 is-invalid") }}
                         <div class="invalid-feedback">
                             {% for error in form.task_type.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.task_type(class="form-control form-control-lg") }}
+                        {{ form.task_type(class="form-control col-sm-7 form-control",id="task-type") }}
                     {% endif %}
                 </div>
-                <div class="form-group">
-                    {{ form.additional_notes.label(class="form-control-label") }}
+                <div class="form-group row">
+                    {{ form.additional_notes.label(class="form-control-label col-sm-4") }}
                     {% if form.additional_notes.errors %}
-                        {{ form.additional_notes(class="form-control form-control-lg is-invalid") }}
+                        {{ form.additional_notes(class="form-control form-control col-sm-7 is-invalid") }}
                         <div class="invalid-feedback">
                             {% for error in form.additional_notes.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.additional_notes(class="form-control form-control-lg") }}
+                        {{ form.additional_notes(class="form-control form-control col-sm-7") }}
                     {% endif %}
                 </div>
-                <div class="form-group">
-                    {{ form.estimated_effort.label(class="form-control-label") }}
+                <div class="form-group row">
+                    {{ form.estimated_effort.label(class="form-control-label col-sm-4") }}
                     {% if form.estimated_effort.errors %}
-                        {{ form.estimated_effort(class="form-control form-control-lg is-invalid") }}
+                        {{ form.estimated_effort(class="form-control form-control col-sm-7 is-invalid") }}
                         <div class="invalid-feedback">
                             {% for error in form.estimated_effort.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.estimated_effort(class="form-control form-control-lg") }}
+                        {{ form.estimated_effort(class="form-control form-control col-sm-7",id="estimated-effort") }}
                     {% endif %}
                 </div>
             </fieldset>
             <div class="form-group">
                 {{ form.submit(class="btn btn-outline-info") }}
             </div>
+            <div>
+                <button type="button" id ="estimation" class="btn btn-outline-info">Calculate</button>
+            </div>
         </form>
     </div>
 {% endblock content %}
+{% block sidecontent %}
+<div>
+    <div id="result">
+
+    </div>
+</div>
+
+{% endblock sidecontent %}
+
 
 
 
