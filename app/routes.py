@@ -1,9 +1,11 @@
-from flask import render_template,flash, redirect,url_for 
+from flask import render_template,flash, redirect,url_for,request, jsonify 
 from app import app,mongo, login_manager,bcrypt 
 from flask_login import login_user, current_user, logout_user, login_required,UserMixin
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from app.models import User
 from app.forms import RegistrationForm,LoginForm,EstimationForm
 from bson.objectid import ObjectId
+from datetime import timedelta
 import pdb
 
 
@@ -54,13 +56,20 @@ def login():
             flash('Login Faild. Please check email and password', 'danger')
     return render_template('login.html', form=form)
 
+@app.route('/api/get_token', methods=['POST'])
+def get_token():
+    data = request.get_json()
+    user = mongo.db.users.find_one({'email': data['email']})
+    password_check = bcrypt.check_password_hash(user["password"], data["password"])
+    if user and password_check:
+        access_token = create_access_token(identity=data['email'], expires_delta=timedelta(hours=1))
+        return jsonify(success=True, access_token=access_token)
+    return jsonify(success=False), 401
+
 @app.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for('home'))
-
-
-
 
 @app.route("/estimation", methods=['GET', 'POST'])
 @login_required
@@ -79,5 +88,3 @@ def estimation():
         flash('task added', 'success')
         return redirect(url_for('home'))
     return render_template('estimation.html', form=form)
-
-
