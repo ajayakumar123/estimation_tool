@@ -1,0 +1,169 @@
+[
+    {
+        "title": "develope login form",
+        "complexity": "high",
+        "size": "small",
+        "type": "development",
+        "description": "developing a form with relevant feilds to submit a task",
+        "estimated_effort":40
+    },
+  
+    {
+        "title": "deploy new version of application",
+        "complexity": "high",
+        "size": "large",
+        "type": "deployment",
+        "description": "deploying the latest version of the application to production environment",
+        "estimated_effort":20
+    },
+  
+  {
+    "title": "update API documentation",
+    "complexity": "low",
+    "size": "small",
+    "type": "documentation",
+    "description": "updating the API documentation to reflect recent changes",
+    "estimated_effort":30
+  },
+  
+  {
+    "title": "optimize database queries",
+    "complexity": "medium",
+    "size": "large",
+    "type": "development",
+    "description": "optimizing database queries to improve application performance",
+    "estimated_effort":60
+  },
+  
+  {
+    "title": "conduct system integration testing",
+    "complexity": "high",
+    "size": "medium",
+    "type": "testing",
+    "description": "performing integration tests to ensure all system components work together",
+    "estimated_effort":10
+  },
+  {
+    "title": "ui design ",
+    "complexity": "low",
+    "size": "small",
+    "type": "development",
+    "description": "developing a form with relevant feilds to submit a task",
+    "estimated_effort":40
+},
+
+{
+    "title": "basic functionality testing",
+    "complexity": "low",
+    "size": "large",
+    "type": "deployment",
+    "description": "deploying the latest version of the application to production environment",
+    "estimated_effort":20
+},
+
+{
+"title": "API implementation",
+"complexity": "high",
+"size": "medium",
+"type": "documentation",
+"description": "updating the API documentation to reflect recent changes",
+"estimated_effort":70
+},
+
+{
+"title": "API integration",
+"complexity": "medium",
+"size": "medium",
+"type": "development",
+"description": "optimizing database queries to improve application performance",
+"estimated_effort":60
+},
+
+{
+"title": "mannual testing",
+"complexity": "low",
+"size": "medium",
+"type": "testing",
+"description": "performing integration tests to ensure all system components work together",
+"estimated_effort":10
+},
+{
+    "title": "EC2 instance creation",
+    "complexity": "low",
+    "size": "small",
+    "type": "development",
+    "description": "developing a form with relevant feilds to submit a task",
+    "estimated_effort":40
+},
+
+{
+    "title": "database integration",
+    "complexity": "high",
+    "size": "large",
+    "type": "deployment",
+    "description": "deploying the latest version of the application to production environment",
+    "estimated_effort":20
+},
+
+{
+"title": "update API documentation",
+"complexity": "medium",
+"size": "small",
+"type": "documentation",
+"description": "updating the API documentation to reflect recent changes",
+"estimated_effort":30
+},
+
+{
+"title": "optimize database queries",
+"complexity": "medium",
+"size": "large",
+"type": "development",
+"description": "optimizing database queries to improve application performance",
+"estimated_effort":40
+},
+
+{
+"title": "integration testing",
+"complexity": "low",
+"size": "medium",
+"type": "testing",
+"description": "performing integration tests to ensure all system components work together",
+"estimated_effort":10
+},
+{
+    "title": "database integration",
+    "complexity": "high",
+    "size": "large",
+    "type": "deployment",
+    "description": "deploying the latest version of the application to production environment",
+    "estimated_effort":20
+},
+
+{
+"title": "update API documentation",
+"complexity": "medium",
+"size": "small",
+"type": "documentation",
+"description": "updating the API documentation to reflect recent changes",
+"estimated_effort":30
+},
+
+{
+"title": "optimize database queries",
+"complexity": "medium",
+"size": "large",
+"type": "development",
+"description": "optimizing database queries to improve application performance",
+"estimated_effort":60
+},
+
+{
+"title": "intial configuration",
+"complexity": "medium",
+"size": "medium",
+"type": "testing",
+"description": "performing integration tests to ensure all system components work together",
+"estimated_effort":20
+}
+]
