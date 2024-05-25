@@ -8,7 +8,7 @@ try:
     
     # database 
     db = myclient["estimation_db"]
-    Collection = db["tasks"]
+    Collection = db["historical_data"]
 
 
     with open('historical_data.json') as file:

@@ -59,15 +59,25 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
+
+
+
 @app.route("/estimation", methods=['GET', 'POST'])
 @login_required
 def estimation():
     form = EstimationForm()
-    print("111111111",form)
     if form.validate_on_submit():
-        # estimation = get_estimation(form.task_details.data, form.task_complexity.data, form.task_size.data, form.task_type.data)
-        estimation = 2.456
-        flash(f'Estimated Effort: {estimation}', 'success')
-        return redirect(url_for('estimate'))
-    print("2222222222222",form)
+        data = { 
+            "title":form.task_details.data,
+            "complexity": form.task_complexity.data,
+            "size": form.task_size.data,
+            "type": form.task_type.data,
+            "description": form.additional_notes.data,
+            "estimated_effort":form.estimated_effort.data
+            }
+        mongo.db.historical_data.insert_one(data)
+        flash('task added', 'success')
+        return redirect(url_for('home'))
     return render_template('estimation.html', form=form)
+
+

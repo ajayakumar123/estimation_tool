@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField ,SelectField
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 
@@ -16,9 +16,15 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Register')
 
 class EstimationForm(FlaskForm):
-    task_details = TextAreaField('Task Details', validators=[DataRequired()])
-    task_complexity = StringField('Complexity', validators=[DataRequired()])
-    task_size = StringField('Size', validators=[DataRequired()])
-    task_type = StringField('Type', validators=[DataRequired()])
+    task_details = StringField('Task Details', validators=[DataRequired(),Length(min=3, max=100)])
+    task_complexity = SelectField('Complexity', choices=[('high','High'),('medium','Medium'),('low','Low')],
+                                   validators=[DataRequired()])
+    task_size = SelectField('Size', choices=[('large','Large'),('medium','Medium'),('small','Small')],
+                            validators=[DataRequired()]) 
+    task_type = SelectField('Type', choices=[('development','Development'),('testing','Testing'),
+                                            ('deployment','Deployment'),('documentation','Documentation')], 
+                            validators=[DataRequired()])
+
     additional_notes = TextAreaField('Additional Notes')
+    estimated_effort = StringField('Estimated Effort',render_kw={'readonly': True})
     submit = SubmitField('Submit')
