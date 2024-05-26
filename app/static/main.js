@@ -12,7 +12,7 @@ document.getElementById('estimation').addEventListener('click', function(e) {
             if (xhr.status === 200 && response.estimate !== undefined) {
                 if (typeof response.estimate == 'number'){
                     document.getElementById('result').innerHTML = '<h3>Estimated Effort: ' + response.estimate + '</h3>' +
-                                                                    '<p>Confidence Interval: ' + response.confidence + '</p>';
+                                                                    '<p>Confidence Level: ' + response.confidence_level + '</p>';
                     document.getElementById('estimated-effort').value = response.estimate;
                     }
                 else{

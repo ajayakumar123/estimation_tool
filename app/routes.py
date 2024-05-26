@@ -86,7 +86,8 @@ def get_estimate():
             estimated_efforts.append(task.get('estimated_effort',0))
         estimate = sum(estimated_efforts)/len(estimated_efforts)
         estimate = round(estimate,2)
-    return jsonify(success=True, estimate=estimate)
+        confidence_level = "Low" if estimate<25 else "Medium" if estimate < 60 else "High"
+    return jsonify(success=True, estimate=estimate, confidence_level=confidence_level)
     
 
 @app.route("/logout")
