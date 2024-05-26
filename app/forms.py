@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField ,SelectField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField ,SelectField,FloatField
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 
@@ -26,5 +26,5 @@ class EstimationForm(FlaskForm):
                             validators=[DataRequired()])
 
     additional_notes = TextAreaField('Additional Notes')
-    estimated_effort = StringField('Estimated Effort',render_kw={'readonly': True})
+    estimated_effort = FloatField('Estimated Effort',render_kw={'readonly': True},validators=[DataRequired()])
     submit = SubmitField('Submit')

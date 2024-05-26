@@ -43,14 +43,14 @@ def login():
     '''helpful for authenticate user based on email and password'''
 
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('estimation'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.get_user(form.email.data)
         password_check = bcrypt.check_password_hash(user.password, form.password.data)
         if user and password_check:
             login_user(user)
-            return redirect(url_for('home'))
+            return redirect(url_for('estimation'))
         else:
             flash('Login Faild. Please check email and password', 'danger')
     return render_template('login.html', form=form)
@@ -109,5 +109,5 @@ def estimation():
             }
         mongo.db.historical_data.insert_one(data)
         flash('task added', 'success')
-        return redirect(url_for('home'))
+        return redirect(url_for('estimation'))
     return render_template('estimation.html', form=form)
