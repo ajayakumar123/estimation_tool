@@ -79,6 +79,7 @@ def get_estimate():
     count = mongo.db.historical_data.count_documents(query)
     if count == 0:
         estimate=False
+        confidence_level=False
     else:
         estimated_efforts = []
         historical_data = mongo.db.historical_data.find(query)
