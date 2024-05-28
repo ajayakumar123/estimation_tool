@@ -1,17 +1,16 @@
 from flask import render_template,flash, redirect,url_for,request, jsonify 
 from app import app,mongo, login_manager,bcrypt 
-from flask_login import login_user, current_user, logout_user, login_required,UserMixin
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from flask_login import login_user, current_user, logout_user, login_required
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from app.models import User
 from app.forms import RegistrationForm,LoginForm,EstimationForm
 from bson.objectid import ObjectId
 from datetime import timedelta
 
 
-
 @login_manager.user_loader
 def load_user(user_id):
-    '''function to load user after login'''
+    '''function to load user after login'''   
     user_data = mongo.db.users.find_one({"_id": ObjectId(user_id)})
     if user_data:
         return User(user_id, user_data['user_name'], user_data['email'], user_data['password'])
@@ -47,26 +46,32 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.get_user(form.email.data)
-        password_check = bcrypt.check_password_hash(user.password, form.password.data)
-        if user and password_check:
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
             return redirect(url_for('estimation'))
         else:
-            flash('Login Faild. Please check email and password', 'danger')
+            flash('Login Faild. Please check email and password','danger')
+        
     return render_template('login.html', form=form)
 
 @app.route('/api/get_token', methods=['POST'])
 def get_token():
+    '''API to access the JWT token by taking inputs email and password'''
     data = request.get_json()
     user = mongo.db.users.find_one({'email': data['email']})
     password_check = bcrypt.check_password_hash(user["password"], data["password"])
     if user and password_check:
         access_token = create_access_token(identity=data['email'], expires_delta=timedelta(hours=6))
+        #JWT token will expire after 6 hours
         return jsonify(success=True, access_token=access_token)
     return jsonify(success=False), 401
 
 @app.route('/api/get_estimate', methods=['POST'])
 def get_estimate():
+    '''API to calculate effort estimation and confidance level based on inputs
+       i/p: task complexity,task size and type
+       o/p: estimation and confidance level 
+    '''
     data = request.get_json()
     complexity = data['task_complexity']
     size = data['task_size']
@@ -93,12 +98,17 @@ def get_estimate():
 
 @app.route("/logout")
 def logout():
+    '''Logout router'''
     logout_user()
     return redirect(url_for('home'))
 
 @app.route("/estimation", methods=['GET', 'POST'])
 @login_required
 def estimation():
+    ''' form to submit effort estimation
+        i/p: title,complexity,size,description
+        o/p: it will submit effort estimation
+    '''
     form = EstimationForm()
     if form.validate_on_submit():
         data = { 

@@ -1,8 +1,10 @@
-from app import mongo, login_manager,bcrypt
+from app import mongo,bcrypt
 from flask_login import UserMixin
 
 
 class User(UserMixin):
+    ''' this user class will helpful to store and retrive 
+    username,email and password to mongodb user collection'''
     def __init__(self, id, user_name, email, password):
         self.user_name = user_name
         self.email = email
@@ -24,7 +26,6 @@ class User(UserMixin):
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
         user = { "user_name": user_name,"email": email,"password": hashed_password}
         res = mongo.db.users.insert_one(user)
-
         return User(str(res.inserted_id), user_name, email, hashed_password)
     
 
