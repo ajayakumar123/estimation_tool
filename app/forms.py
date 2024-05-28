@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField ,SelectField,FloatField,ValidationError
 from wtforms.validators import DataRequired, Email, EqualTo, Length
-from app.models import User
+from app import mongo
 
 
 class LoginForm(FlaskForm):
@@ -17,7 +17,7 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Register')
 
     def validate_email(self, email):
-        user = User.query.filter_by(email=email.data).first()
+        user =mongo.db.users.find_one({'email': email.data})
         if user:
             raise ValidationError('Email address is already registered.')
 

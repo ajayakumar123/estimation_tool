@@ -1,20 +1,22 @@
-## Objective: 
+## Objective:
+ 
 To develop a tool that estimates effort based on historical data using Flask and MongoDB.
 
 ## Key Features:
+
 User registration and authentication
 Task estimation submission
 Effort calculation based on historical data
 Data storage and retrieval in MongoDB
 
 ## Techonlogies used:
+
 Front-End: HTML, CSS, JavaScript, Jinja2,Bootstrap,AJAX
 Back-End: Python(Flask),API
 Database: MongoDB
 Tools: Github, Postman,Docker, Jenkins (for CI/CD)
 
 ## steps to run application:
-=======================
 
 clone the repository: git clone https://github.com/ajayakumar123/estimation_tool.git
 
